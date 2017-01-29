@@ -64,9 +64,10 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'kadir_tugcu.pipelines.SomePipeline': 300,
-#}
+ITEM_PIPELINES = {
+#    'kadir_tugcu.pipelines.KadirTugcuPipeline': 300,
+    'kadir_tugcu.pipelines.JsonWriterPipeline': 500,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
