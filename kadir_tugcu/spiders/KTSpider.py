@@ -30,9 +30,10 @@ class KTSpider(scrapy.Spider):
             yield scrapy.Request(self.base_url + article_link, callback=self.parse_articles)
 
     def parse_articles(self, response):
-        question = response.xpath("//tr[@class='msgEvenTableRow'][1]/td[@class='msgLineDevider']/div[@class='msgBody']/text()").extract()
-        answer = response.xpath("//tr[@class='msgOddTableRow'][1]/td[@class='msgLineDevider']/div[@class='msgBody']/text()").extract()
-        question, answer = ("".join(question)).strip(), ("".join(answer)).strip()
+        question = response.xpath("//tr[@class='msgEvenTableRow'][1]/td[@class='msgLineDevider']/div[@class='msgBody']").extract()
+        answer = response.xpath("//tr[@class='msgOddTableRow'][1]/td[@class='msgLineDevider']/div[@class='msgBody']").extract()
+        question, answer = remove_tags(("".join(question)).strip()), remove_tags(("".join(answer)).strip())
+        question, answer = " ".join(question.split()), " ".join(answer.split())
         item = KadirTugcuItem()
         item['question'], item['answer'], item['url'] = question, answer, response.url
         yield item
