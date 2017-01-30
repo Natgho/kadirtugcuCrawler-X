@@ -31,7 +31,7 @@ class MysqlPipeline(object):
     def open_spider(self, spider):
         self.connection = pymysql.connect(host='localhost',
                                           user='root',
-                                          password='linux',
+                                          password='password',
                                           db='kadirTugcu',
                                           charset='utf8mb4',
                                           cursorclass=pymysql.cursors.DictCursor,

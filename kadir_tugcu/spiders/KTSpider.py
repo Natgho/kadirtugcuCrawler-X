@@ -19,13 +19,11 @@ class KTSpider(scrapy.Spider):
         for article_link in response.xpath("//tr[@class='evenTableRow']/td[2]/div/a/@href").extract():
             next_page = response.xpath("//td[3]/a[@class='pageLink'][@title='Sonraki Sayfa']/@href").extract_first()
             if next_page is not None:
-                print("sonraki sayfaya geciliyor:", next_page)
                 yield scrapy.Request(self.base_url + next_page, callback=self.parse_categories)
             yield scrapy.Request(self.base_url + article_link, callback=self.parse_articles)
         for article_link in response.xpath("//tr[@class='oddTableRow']/td[2]/div/a/@href").extract():
             next_page = response.xpath("//td[3]/a[@class='pageLink'][@title='Sonraki Sayfa']/@href").extract_first()
             if next_page is not None:
-                print("sonraki Sayfaya geciliyor:", next_page)
                 yield scrapy.Request(self.base_url + next_page, callback=self.parse_categories)
             yield scrapy.Request(self.base_url + article_link, callback=self.parse_articles)
 
