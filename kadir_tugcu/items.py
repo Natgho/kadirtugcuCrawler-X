@@ -13,3 +13,5 @@ class KadirTugcuItem(scrapy.Item):
     question = scrapy.Field()
     answer = scrapy.Field()
     url = scrapy.Field()
+    category = scrapy.Field()
+    publish_date = scrapy.Field()
