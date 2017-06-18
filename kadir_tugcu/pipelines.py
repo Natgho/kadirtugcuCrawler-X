@@ -43,8 +43,17 @@ class MysqlPipeline(object):
     def process_item(self, item, spider):
         with self.connection.cursor() as cursor:
             # Create a new record
-            sql = "INSERT INTO `articles` (`question`, `answer`, `url`) VALUES (%s, %s, %s)"
-            cursor.execute(sql, (item['question'], item['answer'], item['url']))
+            sql = """INSERT INTO `articles` (`question`, 
+                                              `answer`, 
+                                              `url`, 
+                                              `category`, 
+                                              `publish_date`) VALUES (%s, %s, %s, %s, %s)"""
+            cursor.execute(sql, (item['question'],
+                                 item['answer'],
+                                 item['url'],
+                                 item['category'],
+                                 item['publish_date']))
+
 
         # connection is not autocommit by default. So you must commit to save
         # your changes.
